@@ -1,2 +1,28 @@
 server:
   port: 3000
+spring:
+  datasource:
+    username: root
+    password: Wing1Q2W#E
+    url: jdbc:mysql://111.228.7.90:3306/jc-club?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源类型 连接池
+    druid: # Druid数据源配置
+      initial-size: 20 # 初始化大小
+      min-idle: 20 # 最小空闲连接数
+      max-active: 100 # 最大活跃连接数
+      max-wait: 60000 # 最大等待时间
+      stat-view-servlet: # Druid监控配置
+        enabled: true # 是否启用监控
+        url-pattern: /druid/* # 监控URL模式
+        login-username: admin # 监控登录用户名
+        login-password: 123456 # 监控登录密码
+      filter: # 过滤器配置
+        stat: # 统计过滤器
+          enabled: true # 是否启用
+          slow-sql-millis: 2000 # 慢SQL执行时间阈值
+          log-slow-sql: true # 是否记录慢SQL
+        wall: # 防火墙过滤器
+          enabled: true # 是否启用
+        config: # 配置过滤器
+          enabled: true # 是否启用
