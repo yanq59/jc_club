@@ -1,15 +1,17 @@
 server:
   port: 3000
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJMnl5Ix3z9UkkiSfp6m0jFOOEPwOgcdC7paUkxcE4p2tgE4LLKRdPSRCHI03qGnb0MTZEBnTcBrtHzR9Vm5YB0CAwEAAQ==
 spring:
   datasource:
     username: root
-    password: Wing1Q2W#E
+    password: KK6Oh4UCCp08GDdz6zx5xDeD6vDN8o9X0aIQMPjyy9evMIRjGdOMpMsTx3MB/W9hDkonsk3w1tDk+puD66myCw==
     url: jdbc:mysql://111.228.7.90:3306/jc-club?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型 连接池
     druid: # Druid数据源配置
       initial-size: 20 # 初始化大小
       min-idle: 20 # 最小空闲连接数
+      connectionProperties: "config.decrypt=true;config.decrypt.key=${publicKey}" # 连接属性，支持加密配置
       max-active: 100 # 最大活跃连接数
       max-wait: 60000 # 最大等待时间
       stat-view-servlet: # Druid监控配置
@@ -26,3 +28,5 @@ spring:
           enabled: true # 是否启用
         config: # 配置过滤器
           enabled: true # 是否启用
+logging:
+  config: classpath:log4j2-spring.xml
