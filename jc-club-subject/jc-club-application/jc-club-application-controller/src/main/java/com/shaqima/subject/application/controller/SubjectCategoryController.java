@@ -1,6 +1,8 @@
 package com.shaqima.subject.application.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Preconditions;
+import com.mysql.cj.util.StringUtils;
 import com.shaqima.subject.application.controller.convert.SubjectCategoryDTOConverter;
 import com.shaqima.subject.application.controller.dto.SubjectCategoryDTO;
 import com.shaqima.subject.common.entity.Result;
@@ -31,11 +33,17 @@ public class SubjectCategoryController {
                 log.info("SubjectCategoryController add subjectCategoryDTO: {}", JSON.toJSONString(subjectCategoryDTO));
 
             }
+//          断言
+            Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
+            Preconditions.checkNotNull(subjectCategoryDTO.getCategoryName(), "分类名称不能为空");
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级不能为空");
+
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertBoToCategory(subjectCategoryDTO);
             subjectCategoryDomainService.add(subjectCategoryBO);
             return Result.ok(true);
         } catch (Exception e) {
-            return Result.fail();
+            log.error("SubjectCategoryController add error: {}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
         }
 
 
