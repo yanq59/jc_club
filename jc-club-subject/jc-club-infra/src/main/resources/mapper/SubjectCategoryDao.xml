@@ -101,7 +101,7 @@ id, category_name, category_type, image_url, parent_id, created_by, created_time
         </where>
     </select>
 
-    <select id="queryPrimaryCategory" resultMap="SubjectCategoryMap">
+    <select id="queryCategory" resultMap="SubjectCategoryMap">
         select * from subject_category
         <where>
             <if test="id != null">

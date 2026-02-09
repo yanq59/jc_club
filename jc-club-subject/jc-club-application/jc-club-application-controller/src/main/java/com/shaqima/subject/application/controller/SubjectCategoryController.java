@@ -32,7 +32,8 @@ public class SubjectCategoryController {
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
         try {
             if (log.isInfoEnabled()) {
-                log.info("SubjectCategoryController add subjectCategoryDTO: {}", JSON.toJSONString(subjectCategoryDTO));
+                log.info("SubjectCategoryController add subjectCategoryDTO: {}",
+                        JSON.toJSONString(subjectCategoryDTO));
 
             }
 //          断言
@@ -54,7 +55,33 @@ public class SubjectCategoryController {
     @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(){
         try {
-            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryPrimaryCategory();
+            SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.
+                    convertBoToCategoryDTOList( subjectCategoryBOList);
+
+            return Result.ok(subjectCategoryDTOList);
+        }catch (Exception e){
+            log.error("SubjectCategoryController queryPrimaryCategory error: {}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/queryCategoryByPrimary")
+    public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController queryCategoryByPrimary subjectCategoryDTO: {}",
+                        JSON.toJSONString(subjectCategoryDTO));
+
+            }
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "父级分类ID不能为空");
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertDTOToCategoryBO(subjectCategoryDTO);
+
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.
                     convertBoToCategoryDTOList( subjectCategoryBOList);
 

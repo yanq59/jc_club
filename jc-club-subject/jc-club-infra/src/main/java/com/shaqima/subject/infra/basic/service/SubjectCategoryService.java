@@ -47,5 +47,5 @@ public interface SubjectCategoryService {
     /**
      * 查询岗位大类
      */
-    List<SubjectCategory> queryPrimaryCategory(SubjectCategory subjectCategory);
+    List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
 }

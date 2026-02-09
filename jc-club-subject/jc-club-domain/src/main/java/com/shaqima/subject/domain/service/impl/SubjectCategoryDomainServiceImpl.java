@@ -29,19 +29,23 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     public void add(SubjectCategoryBO subjectCategoryBO) {
         if (log.isInfoEnabled()) {
-            log.info("SubjectCategoryController add subjectCategoryBO: {}", JSON.toJSONString(subjectCategoryBO));
-
+            log.info("SubjectCategoryController add subjectCategoryBO: {}",
+                    JSON.toJSONString(subjectCategoryBO));
         }
-        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBoToCategory(subjectCategoryBO);
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
+                convertBoToCategory(subjectCategoryBO);
         subjectCategoryService.insert(subjectCategory);
     }
 
     @Override
-    public List<SubjectCategoryBO> queryPrimaryCategory() {
-        SubjectCategory subjectCategory = new SubjectCategory();
-        subjectCategory.setParentId(0L);
-        List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryPrimaryCategory(subjectCategory);
-        List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE.convertBoToCategory(subjectCategoryList);
+    public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
+                convertBoToCategory(subjectCategoryBO);
+
+        List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
+        List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE.
+                convertBoToCategory(subjectCategoryList);
+
         if (log.isInfoEnabled()) {
             log.info("SubjectCategoryController queryPrimaryCategory boList: {}", JSON.toJSONString(boList));
 
