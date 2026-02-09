@@ -1,0 +1,5 @@
+com\shaqima\subject\domain\convert\SubjectCategoryConverter.class
+com\shaqima\subject\domain\service\SubjectCategoryDomainService.class
+com\shaqima\subject\domain\convert\SubjectCategoryConverterImpl.class
+com\shaqima\subject\domain\entity\SubjectCategoryBO.class
+com\shaqima\subject\domain\service\impl\SubjectCategoryDomainServiceImpl.class

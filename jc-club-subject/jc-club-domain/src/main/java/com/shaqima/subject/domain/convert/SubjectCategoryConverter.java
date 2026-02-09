@@ -5,6 +5,8 @@ import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -15,4 +17,6 @@ import org.mapstruct.factory.Mappers;
 public interface SubjectCategoryConverter {
     SubjectCategoryConverter INSTANCE = Mappers.getMapper(SubjectCategoryConverter.class);
     SubjectCategory convertBoToCategory(SubjectCategoryBO subjectCategoryBO);
+
+    List<SubjectCategoryBO> convertBoToCategory(List<SubjectCategory> categoryList);
 }

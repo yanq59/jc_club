@@ -5,6 +5,8 @@ import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -14,5 +16,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface SubjectCategoryDTOConverter {
     SubjectCategoryDTOConverter INSTANCE = Mappers.getMapper(SubjectCategoryDTOConverter.class);
+
     SubjectCategoryBO convertBoToCategory(SubjectCategoryDTO subjectCategoryDTO);
+
+    List<SubjectCategoryDTO> convertBoToCategoryDTOList(List<SubjectCategoryBO>  boList);
 }

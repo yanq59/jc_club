@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,5 +34,18 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         }
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBoToCategory(subjectCategoryBO);
         subjectCategoryService.insert(subjectCategory);
+    }
+
+    @Override
+    public List<SubjectCategoryBO> queryPrimaryCategory() {
+        SubjectCategory subjectCategory = new SubjectCategory();
+        subjectCategory.setParentId(0L);
+        List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryPrimaryCategory(subjectCategory);
+        List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE.convertBoToCategory(subjectCategoryList);
+        if (log.isInfoEnabled()) {
+            log.info("SubjectCategoryController queryPrimaryCategory boList: {}", JSON.toJSONString(boList));
+
+        }
+        return boList;
     }
 }

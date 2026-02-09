@@ -1,0 +1,5 @@
+com\shaqima\subject\application\controller\convert\SubjectCategoryDTOConverter.class
+com\shaqima\subject\application\controller\SubjectCategoryController.class
+com\shaqima\subject\application\controller\SubjectController.class
+com\shaqima\subject\application\controller\convert\SubjectCategoryDTOConverterImpl.class
+com\shaqima\subject\application\controller\dto\SubjectCategoryDTO.class

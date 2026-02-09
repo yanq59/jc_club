@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.security.auth.Subject;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +40,8 @@ public class SubjectCategoryController {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryName(), "分类名称不能为空");
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级不能为空");
 
-            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertBoToCategory(subjectCategoryDTO);
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertBoToCategory(subjectCategoryDTO);
             subjectCategoryDomainService.add(subjectCategoryBO);
             return Result.ok(true);
         } catch (Exception e) {
@@ -46,6 +49,20 @@ public class SubjectCategoryController {
             return Result.fail(e.getMessage());
         }
 
+    }
+
+    @PostMapping("/queryPrimaryCategory")
+    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(){
+        try {
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryPrimaryCategory();
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.
+                    convertBoToCategoryDTOList( subjectCategoryBOList);
+
+            return Result.ok(subjectCategoryDTOList);
+        }catch (Exception e){
+            log.error("SubjectCategoryController queryPrimaryCategory error: {}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        }
 
     }
 }

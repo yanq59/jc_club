@@ -3,6 +3,8 @@ package com.shaqima.subject.domain.service;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -12,4 +14,8 @@ import com.shaqima.subject.infra.basic.entity.SubjectCategory;
 public interface SubjectCategoryDomainService {
 
     void add(SubjectCategoryBO subjectCategoryBO);
+/**
+    * 查询岗位大类
+ * */
+    List<SubjectCategoryBO> queryPrimaryCategory();
 }
