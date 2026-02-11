@@ -1,6 +1,6 @@
-package com.shaqima.subject.application.controller.convert;
+package com.shaqima.subject.application.convert;
 
-import com.shaqima.subject.application.controller.dto.SubjectCategoryDTO;
+import com.shaqima.subject.application.dto.SubjectCategoryDTO;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

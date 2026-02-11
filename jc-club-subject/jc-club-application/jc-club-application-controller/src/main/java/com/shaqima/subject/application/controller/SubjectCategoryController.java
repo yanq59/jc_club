@@ -2,9 +2,8 @@ package com.shaqima.subject.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Preconditions;
-import com.mysql.cj.util.StringUtils;
-import com.shaqima.subject.application.controller.convert.SubjectCategoryDTOConverter;
-import com.shaqima.subject.application.controller.dto.SubjectCategoryDTO;
+import com.shaqima.subject.application.convert.SubjectCategoryDTOConverter;
+import com.shaqima.subject.application.dto.SubjectCategoryDTO;
 import com.shaqima.subject.common.entity.Result;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import com.shaqima.subject.domain.service.SubjectCategoryDomainService;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.security.auth.Subject;
 import java.util.List;
 
 /**
@@ -53,7 +51,7 @@ public class SubjectCategoryController {
     }
 
     @PostMapping("/queryPrimaryCategory")
-    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(){
+    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
         try {
             SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);

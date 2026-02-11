@@ -1,4 +1,4 @@
-package com.shaqima.subject.application.controller.dto;
+package com.shaqima.subject.application.dto;
 
 import lombok.Data;
 

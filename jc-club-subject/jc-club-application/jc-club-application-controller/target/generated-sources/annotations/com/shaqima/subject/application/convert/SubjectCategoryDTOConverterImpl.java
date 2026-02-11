@@ -1,6 +1,6 @@
-package com.shaqima.subject.application.controller.convert;
+package com.shaqima.subject.application.convert;
 
-import com.shaqima.subject.application.controller.dto.SubjectCategoryDTO;
+import com.shaqima.subject.application.dto.SubjectCategoryDTO;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-09T18:24:20+0900",
+    date = "2026-02-11T20:17:41+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_241 (Oracle Corporation)"
 )
 public class SubjectCategoryDTOConverterImpl implements SubjectCategoryDTOConverter {
