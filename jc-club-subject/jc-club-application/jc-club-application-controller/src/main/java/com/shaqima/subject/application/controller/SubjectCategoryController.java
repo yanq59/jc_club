@@ -53,9 +53,10 @@ public class SubjectCategoryController {
     }
 
     @PostMapping("/queryPrimaryCategory")
-    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(){
+    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
         try {
-            SubjectCategoryBO subjectCategoryBO = new SubjectCategoryBO();
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertDTOToCategoryBO(subjectCategoryDTO);
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.
                     convertBoToCategoryDTOList( subjectCategoryBOList);
@@ -89,6 +90,54 @@ public class SubjectCategoryController {
         }catch (Exception e){
             log.error("SubjectCategoryController queryPrimaryCategory error: {}", e.getMessage(), e);
             return Result.fail(e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * 更新分类
+     * @return
+     */
+    @PostMapping("/update")
+    public Result<Boolean> update(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController update subjectCategoryDTO: {}",
+                        JSON.toJSONString(subjectCategoryDTO));
+
+            }
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertDTOToCategoryBO(subjectCategoryDTO);
+            Boolean result = subjectCategoryDomainService.update(subjectCategoryBO);
+            return Result.ok(result);
+        }catch (Exception e){
+            log.error("SubjectCategoryController update error: {}", e.getMessage(), e);
+            return Result.fail("更新分类失败");
+        }
+
+    }
+
+
+    /**
+     * 删除分类
+     * @return
+     */
+    @PostMapping("/delete")
+    public Result<Boolean> delete(@RequestBody SubjectCategoryDTO subjectCategoryDTO){
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController delete subjectCategoryDTO: {}",
+                        JSON.toJSONString(subjectCategoryDTO));
+
+            }
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertDTOToCategoryBO(subjectCategoryDTO);
+            Boolean result = subjectCategoryDomainService.delete(subjectCategoryBO);
+            return Result.ok(result);
+        }catch (Exception e){
+            log.error("SubjectCategoryController delete error: {}", e.getMessage(), e);
+            return Result.fail("删除分类失败");
         }
 
     }

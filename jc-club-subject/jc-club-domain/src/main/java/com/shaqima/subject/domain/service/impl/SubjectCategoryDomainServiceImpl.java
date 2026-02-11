@@ -1,6 +1,7 @@
 package com.shaqima.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.shaqima.subject.common.enums.IsDeletedFlagEnum;
 import com.shaqima.subject.domain.convert.SubjectCategoryConverter;
 import com.shaqima.subject.domain.entity.SubjectCategoryBO;
 import com.shaqima.subject.domain.service.SubjectCategoryDomainService;
@@ -34,6 +35,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
         }
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
                 convertBoToCategory(subjectCategoryBO);
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         subjectCategoryService.insert(subjectCategory);
     }
 
@@ -41,7 +43,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO) {
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
                 convertBoToCategory(subjectCategoryBO);
-
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
         List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE.
                 convertBoToCategory(subjectCategoryList);
@@ -51,5 +53,22 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
         }
         return boList;
+    }
+
+    @Override
+    public Boolean update(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
+                convertBoToCategory(subjectCategoryBO);
+        int count = subjectCategoryService.update(subjectCategory);
+        return count > 0;
+    }
+
+    @Override
+    public Boolean delete(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
+                convertBoToCategory(subjectCategoryBO);
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+        int count = subjectCategoryService.update(subjectCategory);
+        return count > 0;
     }
 }

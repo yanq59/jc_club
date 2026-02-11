@@ -55,12 +55,11 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
      * 修改数据
      *
      * @param subjectCategory 实例对象
-     * @return 实例对象
+     * @return int
      */
     @Override
-    public SubjectCategory update(SubjectCategory subjectCategory) {
-        this.subjectCategoryDao.update(subjectCategory);
-        return this.queryById(subjectCategory.getId());
+    public int update(SubjectCategory subjectCategory) {
+        return this.subjectCategoryDao.update(subjectCategory);
     }
 
     /**
