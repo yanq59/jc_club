@@ -56,6 +56,5 @@ public class SubjectCategory implements Serializable {
     private Integer isDeleted;
 
 
-
 }
 
