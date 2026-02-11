@@ -31,8 +31,10 @@ public interface SubjectCategoryService {
     /**
      * 修改数据
      *
+     * @param subjectCategory 实例对象
+     * @return 实例对象
      */
-    int update(SubjectCategory subjectCategory);
+    SubjectCategory update(SubjectCategory subjectCategory);
 
     /**
      * 通过主键删除数据
