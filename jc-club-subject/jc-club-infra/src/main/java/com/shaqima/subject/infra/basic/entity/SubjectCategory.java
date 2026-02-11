@@ -57,6 +57,5 @@ public class SubjectCategory implements Serializable {
 
 
 
-
 }
 
