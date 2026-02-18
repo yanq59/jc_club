@@ -30,7 +30,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     public void add(SubjectCategoryBO subjectCategoryBO) {
         if (log.isInfoEnabled()) {
-            log.info("SubjectCategoryController add subjectCategoryBO: {}",
+            log.info("SubjectCategoryDomainServiceImpl add subjectCategoryBO: {}",
                     JSON.toJSONString(subjectCategoryBO));
         }
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.
@@ -49,7 +49,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                 convertBoToCategory(subjectCategoryList);
 
         if (log.isInfoEnabled()) {
-            log.info("SubjectCategoryController queryPrimaryCategory boList: {}", JSON.toJSONString(boList));
+            log.info("SubjectCategoryDomainServiceImpl queryCategory boList: {}", JSON.toJSONString(boList));
 
         }
         return boList;
